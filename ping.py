@@ -1,3 +1,5 @@
+# Setup
+
 import time
 from pylsl import StreamInlet, StreamOutlet, StreamInfo, resolve_byprop
 
@@ -20,6 +22,8 @@ inlet = StreamInlet(streams[0])
 print("Pong stream found.")
 
 
+
+# Interaction loop
 
 i = 1
 

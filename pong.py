@@ -1,3 +1,5 @@
+# Setup
+
 import time
 from pylsl import StreamInlet, StreamOutlet, StreamInfo, resolve_byprop
 
@@ -17,6 +19,8 @@ inlet = StreamInlet(streams[0])
 print("Ping stream found.")
 
 
+
+# Interaction loop
 
 while True:
     # Receive a sample from the Ping stream
