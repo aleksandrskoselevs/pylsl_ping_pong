@@ -1,12 +1,10 @@
 import time
 from pylsl import StreamInlet, StreamOutlet, StreamInfo, resolve_byprop
 
-# Define the pong stream
 info = StreamInfo('PongStream', 'Markers', 1, 0, 'int32', 'pong_stream')
 outlet = StreamOutlet(info)
 print("Pong stream created.")
 
-# Resolve the Ping stream
 print("Looking for a Ping stream...")
 streams = None
 while streams is None:
@@ -18,16 +16,16 @@ while streams is None:
 inlet = StreamInlet(streams[0])
 print("Ping stream found.")
 
+
+
 while True:
     # Receive a sample from the Ping stream
-    # sample, timestamp = inlet.pull_sample()
     sample, timestamp = inlet.pull_chunk(timeout=0.0)
 
     if sample is not None and len(sample) != 0:
         print(f"Received from Ping: {sample} at {timestamp}")
 
-        # outlet.push_sample(sample)
-        outlet.push_chunk(sample, sample[0][0])
+        outlet.push_chunk(sample)
         print(f"Sent to Ping: {sample}")
 
     # Sleep to simulate time between responses
