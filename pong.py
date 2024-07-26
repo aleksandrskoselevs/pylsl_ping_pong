@@ -20,10 +20,10 @@ print("Ping stream found.")
 
 while True:
     # Receive a sample from the Ping stream
-    sample, timestamp = inlet.pull_sample()
-    # sample, timestamp = inlet.pull_chunk()
+    # sample, timestamp = inlet.pull_sample()
+    sample, timestamp = inlet.pull_chunk()
 
-    if sample is not None:
+    if sample is not None and len(sample) != 0:
         print(f"Received from Ping: {sample} at {timestamp}")
 
         # outlet.push_sample(sample)

@@ -1,11 +1,5 @@
 import time
-import logging
 from pylsl import StreamInlet, StreamOutlet, StreamInfo, resolve_byprop
-
-from pylsl import resolve_stream
-
-# Setup logging
-# logging.basicConfig(level=print)
 
 # Define the ping stream
 info = StreamInfo('PingStream', 'Markers', 1, 0, 'int32', 'ping_stream')
@@ -32,8 +26,8 @@ i = 1
 
 while True:
     sample = [i]
-    outlet.push_sample(sample)
-    # outlet.push_chunk(sample)
+    # outlet.push_sample(sample)
+    outlet.push_chunk(sample)
     print(f"Sent to Pong: {sample}")
 
     time.sleep(5)
