@@ -21,13 +21,12 @@ while streams is None:
 inlet = StreamInlet(streams[0])
 print("Pong stream found.")
 
-# 0 when sent from Pong to Ping, Ping prints it out as an empty array
 i = 1
 
 while True:
     sample = [i]
     # outlet.push_sample(sample)
-    outlet.push_chunk(sample)
+    outlet.push_chunk(sample, i)
     print(f"Sent to Pong: {sample}")
 
     time.sleep(5)
@@ -65,4 +64,4 @@ while True:
     # Sleep to simulate time between responses
     time.sleep(1)
 
-    i += 1
+    # i += 1

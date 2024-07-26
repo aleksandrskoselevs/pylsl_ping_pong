@@ -21,13 +21,13 @@ print("Ping stream found.")
 while True:
     # Receive a sample from the Ping stream
     # sample, timestamp = inlet.pull_sample()
-    sample, timestamp = inlet.pull_chunk()
+    sample, timestamp = inlet.pull_chunk(timeout=0.0)
 
     if sample is not None and len(sample) != 0:
         print(f"Received from Ping: {sample} at {timestamp}")
 
         # outlet.push_sample(sample)
-        outlet.push_chunk(sample)
+        outlet.push_chunk(sample, sample[0][0])
         print(f"Sent to Ping: {sample}")
 
     # Sleep to simulate time between responses
