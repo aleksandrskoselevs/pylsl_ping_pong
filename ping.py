@@ -22,26 +22,30 @@ inlet = StreamInlet(streams[0])
 print("Pong stream found.")
 
 
-
 # Interaction loop
 
 i = 1
 
+outgoing_sample = [i]
+outlet.push_chunk(outgoing_sample)
+print(f"Sent to Pong: {outgoing_sample}")
+
+time.sleep(5)
+
 while True:
-    sample = [i]
-    outlet.push_chunk(sample)
-    print(f"Sent to Pong: {sample}")
+    incoming_sample, timestamp = inlet.pull_chunk(timeout=0.0)
 
-    time.sleep(5)
-
-    sample, timestamp = inlet.pull_chunk(timeout=0.0)
-
-    while sample is None:     
-        sample, timestamp = inlet.pull_chunk(timeout=0.0)    
-
-
-    print(f"Received from Pong: {sample}, at {timestamp}")
+    # This halts, because the first sample is len 0
+    # if sample is not None and len(sample) != 0:
     
-    time.sleep(1)
+    if incoming_sample is not None:
+        print(f"Received from Pong: {incoming_sample} at {timestamp}")
 
-    i += 1
+        i += 1
+        outgoing_sample = [i]
+        
+        outlet.push_chunk(outgoing_sample)
+        print(f"Sent to Pong: {outgoing_sample}")
+
+    # Sleep to simulate time between responses
+    time.sleep(1)
