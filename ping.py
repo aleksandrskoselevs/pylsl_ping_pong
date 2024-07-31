@@ -30,15 +30,10 @@ outgoing_sample = [i]
 outlet.push_chunk(outgoing_sample)
 print(f"Sent to Pong: {outgoing_sample}")
 
-time.sleep(5)
-
 while True:
     incoming_sample, timestamp = inlet.pull_chunk(timeout=0.0)
 
-    # This halts, because the first sample is len 0
-    # if sample is not None and len(sample) != 0:
-    
-    if incoming_sample is not None:
+    if incoming_sample is not None and len(incoming_sample) != 0:
         print(f"Received from Pong: {incoming_sample} at {timestamp}")
 
         i += 1
